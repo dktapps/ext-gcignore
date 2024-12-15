@@ -15,10 +15,13 @@ For example, PocketMine-MP `World` is, by itself, somewhat less costly to examin
 
 ## How to use
 
-I recommend using `gc_ignore()` on any object that has:
-- Lots of descendent objects
-- References any object that has lots of descendents
-- Singletons
+I recommend using `gc_ignore()` on any object that meets any of the following criteria:
+- References a lot of objects, directly or indirectly
+- Is a singleton
+
+It may also be beneficial for simple, short-lived objects produced en-masse that you're sure are acyclic, like a `Vector3`.
+If you cache these types of objects, they'll fill up the GC root buffer despite not having any cycles (although this may be addressed by changes like https://github.com/php/php-src/pull/17130).
+However, I haven't done much testing of this use-case.
 
 ## How does it work?
 
