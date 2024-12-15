@@ -1,0 +1,7 @@
+ARG_ENABLE('gcignore', 'gcignore support', 'no');
+
+if (PHP_GCIGNORE != 'no') {
+	AC_DEFINE('HAVE_GCIGNORE', 1, 'gcignore support enabled');
+
+	EXTENSION('gcignore', 'gcignore.c', null, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
+}
